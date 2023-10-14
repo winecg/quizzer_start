@@ -46,29 +46,29 @@ describe("Quizzer Tests", () => {
         }
     });
 
-    // test("Users can select a specific quiz to see the questions, including the questions name, body, and points", () => {
-    //     const text = screen.getByText("Simple_Questions");
-    //     text.click();
-    //     expect(screen.getByText("Exit")).toBeInTheDocument();
-    //     expect(
-    //         screen.getByText("What is 2+2?", { exact: false })
-    //     ).toBeInTheDocument();
-    //     for (let i = 0; i < QUIZZES[1].questionList.length; i++) {
-    //         if (QUIZZES[1].questionList[i].published == true) {
-    //             expect(
-    //                 screen.queryByText(QUIZZES[1].questionList[i].body, {
-    //                     exact: false
-    //                 })
-    //             ).toBeInTheDocument();
-    //             expect(
-    //                 screen.queryAllByText(
-    //                     QUIZZES[1].questionList[i].points + " pt",
-    //                     { exact: false }
-    //                 )[0]
-    //             ).toBeInTheDocument();
-    //         }
-    //     }
-    // });
+    test("Users can select a specific quiz to see the questions, including the questions name, body, and points", () => {
+        const text = screen.getByText("Simple_Questions");
+        text.click();
+        expect(screen.getByText("Exit")).toBeInTheDocument();
+        expect(
+            screen.getByText("What is 2+2?", { exact: false })
+        ).toBeInTheDocument();
+        for (let i = 0; i < QUIZZES[1].questionList.length; i++) {
+            if (QUIZZES[1].questionList[i].published === true) {
+                expect(
+                    screen.queryByText(QUIZZES[1].questionList[i].body, {
+                        exact: false
+                    })
+                ).toBeInTheDocument();
+                expect(
+                    screen.queryAllByText(
+                        QUIZZES[1].questionList[i].points + " pt",
+                        { exact: false }
+                    )[0]
+                ).toBeInTheDocument();
+            }
+        }
+    });
 
     test("Users can enter or choose an answer for a quiz question, and be told if they are correct", () => {
         const text = screen.getByText("Simple_Questions");
@@ -223,28 +223,28 @@ describe("Quizzer Tests", () => {
         expect(afterOrder[1]).toHaveTextContent("What is 2+2?");
     });
 
-    // test("Quiz questions can be of AT LEAST two types: a short answer question or multiple choice question", () => {
-    //     const text = screen.getByText("Simple_Questions");
-    //     text.click();
+    test("Quiz questions can be of AT LEAST two types: a short answer question or multiple choice question", () => {
+        const text = screen.getByText("Simple_Questions");
+        text.click();
 
-    //     const editButton = screen.getByText("Edit");
-    //     editButton.click();
+        const editButton = screen.getByText("Edit");
+        editButton.click();
 
-    //     const dropdown = screen.getAllByLabelText("Type:")[0];
-    //     userEvent.selectOptions(dropdown, "multiple_choice_question");
-    //     const options: HTMLOptionElement[] = screen.getAllByTestId(
-    //         "question_type_dropdown_0"
-    //     );
-    //     expect(options[0].selected).toBeTruthy();
-    //     expect(options[1].selected).toBeFalsy();
+        const dropdown = screen.getAllByLabelText("Type:")[0];
+        userEvent.selectOptions(dropdown, "multiple_choice_question");
+        const options: HTMLOptionElement[] = screen.getAllByTestId(
+            "question_type_dropdown_0"
+        );
+        expect(options[0].selected).toBeTruthy();
+        expect(options[1].selected).toBeFalsy();
 
-    //     const saveButton = screen.getByText("Save");
-    //     saveButton.click();
+        const saveButton = screen.getByText("Save");
+        saveButton.click();
 
-    //     expect(
-    //         screen.getByText("Example Answer", {
-    //             exact: false
-    //         })[0]
-    //     ).toBeInTheDocument();
-    // });
+        expect(
+            screen.getByText("Example Answer", {
+                exact: false
+            })
+        ).toBeInTheDocument();
+    });
 });
